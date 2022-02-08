@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public readonly int movementYHash = Animator.StringToHash("MovementY");
     public readonly int isJumpingHash = Animator.StringToHash("isJumping");
     public readonly int isRunningHash = Animator.StringToHash("isRunning");
-    public readonly int isFiringHash = Animator.StringToHash("isFiring");
+
 
     private void Awake()
     {
@@ -113,18 +113,7 @@ public class PlayerMovement : MonoBehaviour
         // if we aim up, adjust animations to have a mask that will let us properly animate the aim
     }
 
-    public void OnFire(InputValue value)
-    {
-        playerController.isFiring = value.isPressed;
-        playerAnimator.SetBool(isFiringHash, playerController.isFiring);
-
-    }
-
-    public void OnReload(InputValue value)
-    {
-
-    }
-
+   
     private void OnCollisionEnter(Collision collision)
     {
         if (!collision.gameObject.CompareTag("Ground") && !playerController.isJumping)

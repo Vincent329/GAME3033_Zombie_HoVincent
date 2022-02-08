@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7446848382247842043}
+  - component: {fileID: 6563984564806035921}
   m_Layer: 0
   m_Name: AK47NewPrefab
   m_TagString: Untagged
@@ -32,37 +33,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6675786231149016628
-GameObject:
+--- !u!114 &6563984564806035921
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6675786231149016631}
-  m_Layer: 0
-  m_Name: AK47AssaultRifle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6675786231149016631
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6675786231149016628}
-  m_LocalRotation: {x: -0.45560583, y: 0.5407618, z: 0.5407618, w: 0.45560583}
-  m_LocalPosition: {x: -0.02, y: 0.074, z: 0.056}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7249730065733019259}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -90, y: -0.23, z: 100}
+  m_GameObject: {fileID: 1096582326323888653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e7d14de8349a6b4ba26910921e5d625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gripLocation: {fileID: 4873919012503064407}
+  weaponHolder: {fileID: 0}
+  isFiring: 0
+  isReloading: 0
+  weaponStats:
+    weaponType: 2
+    weaponName: AK-47
+    damage: 35
+    bulletsInClip: 30
+    clipSize: 30
+    fireStartDelay: 0.07
+    fireRate: 0.5
+    fireDistance: 500
+    repeating: 1
+    weaponHitLayers:
+      serializedVersion: 2
+      m_Bits: 2147483647
 --- !u!1 &7246817010856204007
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +179,7 @@ Transform:
   - {fileID: 7250130467060949571}
   - {fileID: 7242486525914028069}
   - {fileID: 7242652892307113297}
-  - {fileID: 6675786231149016631}
+  - {fileID: 4873919012503064407}
   m_Father: {fileID: 7446848382247842043}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 277.2, y: 0.8, z: 94.6}
@@ -414,3 +413,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8419126978735814863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4873919012503064407}
+  m_Layer: 0
+  m_Name: IKGripSocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4873919012503064407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8419126978735814863}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.053, y: 0.057, z: 0.341}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7249730065733019259}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
