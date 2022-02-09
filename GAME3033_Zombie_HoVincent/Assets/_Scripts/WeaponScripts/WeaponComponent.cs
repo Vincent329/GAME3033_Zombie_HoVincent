@@ -28,14 +28,18 @@ public struct WeaponStats
     public float fireDistance;
     public bool repeating;
     public LayerMask weaponHitLayers;
+    public int totalBullets;
 }
 
 
 public class WeaponComponent : MonoBehaviour
 {
     public Transform gripLocation;
+    public Transform firingEffectLocation;
 
     public WeaponHolder weaponHolder;
+    [SerializeField]
+    protected ParticleSystem firingEffect;
 
     public bool isFiring = false;
     public bool isReloading = false;
@@ -52,7 +56,7 @@ public class WeaponComponent : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -80,13 +84,50 @@ public class WeaponComponent : MonoBehaviour
     }
     public virtual void StopFiringWeapon() { 
         isFiring = false;
+        
         CancelInvoke(nameof(FireWeapon));
-      }
+        if (firingEffect)
+        {
+            firingEffect.Stop();
+        }
+    }
 
     protected virtual void FireWeapon() {
         Debug.Log("Firing Weapon");
 
         weaponStats.bulletsInClip--;
+    }
+
+    //Deal with Ammo Counts and perhaps Particle Effects
+    public virtual void StartReloading()
+    {
+        isReloading = true;
+        ReloadWeapon();
+    }
+
+    public virtual void StopReloading()
+    {
+        isReloading = false;
+        if (firingEffect)
+        {
+            firingEffect.Stop();
+        }
+    }
+
+    protected virtual void ReloadWeapon()
+    {
+        // if there's a firing effect, hide it here
+        int bulletsToReload = weaponStats.clipSize - weaponStats.totalBullets;
+        if (bulletsToReload < 0)
+        {
+            weaponStats.bulletsInClip = weaponStats.clipSize;
+            weaponStats.totalBullets -= weaponStats.clipSize;
+        }
+        else
+        {
+            weaponStats.bulletsInClip = weaponStats.totalBullets;
+            weaponStats.totalBullets = 0;
+        }
     }
 
 }
