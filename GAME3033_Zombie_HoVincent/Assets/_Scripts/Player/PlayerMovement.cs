@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float runSpeed = 10;
     [SerializeField] private float walkSpeed = 5;
     [SerializeField] private float jumpForce = 5;
+    [SerializeField] private float test = 0;
 
     private PlayerController playerController;
     private Rigidbody rb;
@@ -19,6 +20,10 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection = Vector3.zero;
     Vector2 lookInput = Vector2.zero;
 
+    float lookUpMax = 180;
+    float lookUpMin = -180;
+    float lookUpClamp;
+
     public float aimSensitivity = 1;
 
     // Animator hashes
@@ -26,6 +31,9 @@ public class PlayerMovement : MonoBehaviour
     public readonly int movementYHash = Animator.StringToHash("MovementY");
     public readonly int isJumpingHash = Animator.StringToHash("isJumping");
     public readonly int isRunningHash = Animator.StringToHash("isRunning");
+    public readonly int isFiringHash = Animator.StringToHash("isFiring");
+    public readonly int isReloadingHash = Animator.StringToHash("isReloading");
+    public readonly int AimVerticalHash = Animator.StringToHash("AimVertical");
 
 
     private void Awake()
@@ -33,11 +41,17 @@ public class PlayerMovement : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
+
+        if (!GameManager.Instance.cursorActive)
+        {
+            AppEvents.InvokeOnMouseCursorEnable(false);
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+       lookUpClamp = Mathf.Clamp(0.0f, lookUpMin, lookUpMax);
     }
 
     // Update is called once per frame
@@ -54,14 +68,21 @@ public class PlayerMovement : MonoBehaviour
         angles.z = 0;
 
         var angle = followTarget.transform.localEulerAngles.x;
-        if (angle > 180 && angle < 340)
+        if (angle > 180 && angle < 300)
         {
-            angles.x = 340;
+            angles.x = 300;
         }
-        if (angle < 180 && angle > 40)
+        if (angle < 180 && angle > 70)
         {
-            angles.x = 40;
+            angles.x = 70;
         }
+
+        lookUpClamp += lookInput.y;
+        float lookParameter = Mathf.InverseLerp(lookUpMin, lookUpMax, lookUpClamp);
+
+        playerAnimator.SetFloat(AimVerticalHash, lookParameter);
+
+        // if we aim up, adjust animations to have a mask that will let us properly animate the aim
 
         followTarget.transform.localEulerAngles = angles;
 
@@ -96,6 +117,11 @@ public class PlayerMovement : MonoBehaviour
     }
     public void OnJump(InputValue value)
     {
+        if (playerController.isJumping)
+        {
+            return;
+        }
+
         playerController.isJumping = value.isPressed;
         rb.AddForce((transform.up + moveDirection) * jumpForce, ForceMode.Impulse);
         playerAnimator.SetBool(isJumpingHash, playerController.isJumping);
@@ -110,7 +136,9 @@ public class PlayerMovement : MonoBehaviour
     public void OnLook(InputValue value)
     {
         lookInput = value.Get<Vector2>();
-        // if we aim up, adjust animations to have a mask that will let us properly animate the aim
+
+      
+        
     }
 
    
