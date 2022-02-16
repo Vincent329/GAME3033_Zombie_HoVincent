@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 349d00c48fe036a479c6647283d4e36b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursorActive: 0
 --- !u!1 &161771272
 GameObject:
   m_ObjectHideFlags: 0
@@ -5048,7 +5049,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3529412, y: 1}
+    m_SensorSize: {x: 1.1956521, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5097,7 +5098,35 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 84da9453-a9dc-41a9-bf67-1094fae0f648
+    m_ActionName: PlayerActions/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9ebc461f-c904-4954-8b9c-57dd01f6dcc7
+    m_ActionName: PlayerActions/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 77e3b8d1-e78c-4a82-902a-7fa937fae14e
+    m_ActionName: PlayerActions/Run[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 69eb9925-d049-4710-9e37-060704f44074
+    m_ActionName: PlayerActions/Aim[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 18cd9680-0fb0-4ccb-bff6-fea6f0c96697
+    m_ActionName: PlayerActions/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1a1ca4f4-0120-4280-ac7b-622225ae4325
+    m_ActionName: PlayerActions/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 607ee77d-d76d-474f-af43-ef90889f7603
+    m_ActionName: PlayerActions/Fire[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerActions
@@ -5737,7 +5766,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25032
+  m_Name: pb_Mesh25036
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8777,6 +8806,7 @@ MonoBehaviour:
   runSpeed: 10
   walkSpeed: 5
   jumpForce: 5
+  test: 0
   followTarget: {fileID: 368709036}
   aimSensitivity: 0.1
 --- !u!4 &4343717414380712125
