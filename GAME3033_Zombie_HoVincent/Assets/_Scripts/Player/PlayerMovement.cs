@@ -68,6 +68,17 @@ public class PlayerMovement : MonoBehaviour
         angles.z = 0;
 
         var angle = followTarget.transform.localEulerAngles.x;
+
+        float min = -60;
+        float max = 70.0f;
+        float range = max - min;
+        float offsetToZero = 0 - min;
+        float aimAngle = followTarget.transform.localEulerAngles.x;
+        aimAngle = (aimAngle > 180) ? aimAngle - 360 : aimAngle;
+        float val = (aimAngle + offsetToZero) / (range);
+        print(val);
+        playerAnimator.SetFloat(AimVerticalHash, val);
+
         if (angle > 180 && angle < 300)
         {
             angles.x = 300;
@@ -77,13 +88,9 @@ public class PlayerMovement : MonoBehaviour
             angles.x = 70;
         }
 
-        lookUpClamp += lookInput.y;
-        float lookParameter = Mathf.InverseLerp(lookUpMin, lookUpMax, lookUpClamp);
 
-        playerAnimator.SetFloat(AimVerticalHash, lookParameter);
 
         // if we aim up, adjust animations to have a mask that will let us properly animate the aim
-
         followTarget.transform.localEulerAngles = angles;
 
         // rotate the player rotation based on the look transform
